@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ws01ModelContainer" CdmEntityContainer="ws01Entities">
+    <EntitySetMapping Name="Credits">
+      <EntityTypeMapping TypeName="ws01Model.Credits">
+        <MappingFragment StoreEntitySet="Credits">
+          <ScalarProperty Name="ID_credita" ColumnName="ID_credita" />
+          <ScalarProperty Name="ID_klienta" ColumnName="ID_klienta" />
+          <ScalarProperty Name="Sum_Credita" ColumnName="Sum_Credita" />
+          <ScalarProperty Name="Procent_credita" ColumnName="Procent_credita" />
+          <ScalarProperty Name="Date_Oformleniya" ColumnName="Date_Oformleniya" />
+          <ScalarProperty Name="ID__sotrudnika" ColumnName="ID_ sotrudnika" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klient">
+      <EntityTypeMapping TypeName="ws01Model.Klient">
+        <MappingFragment StoreEntitySet="Klient">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="ID_klienta" ColumnName="ID_klienta" />
+          <ScalarProperty Name="FIO_klienta" ColumnName="FIO_klienta" />
+          <ScalarProperty Name="Snils" ColumnName="Snils" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+          <ScalarProperty Name="Date_Birth" ColumnName="Date_Birth" />
+          <ScalarProperty Name="Credit" ColumnName="Credit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sotrudnik">
+      <EntityTypeMapping TypeName="ws01Model.Sotrudnik">
+        <MappingFragment StoreEntitySet="Sotrudnik">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="ID_sotrudnika" ColumnName="ID_sotrudnika" />
+          <ScalarProperty Name="FIO_sotrudnika" ColumnName="FIO_sotrudnika" />
+          <ScalarProperty Name="YYYY_MM_DD" ColumnName="YYYY-MM-DD" />
+          <ScalarProperty Name="Passport__Seria__Num_" ColumnName="Passport (Seria, Num)" />
+          <ScalarProperty Name="dolgnost" ColumnName="dolgnost" />
+          <ScalarProperty Name="otdel" ColumnName="otdel" />
+          <ScalarProperty Name="Zarplata" ColumnName="Zarplata" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

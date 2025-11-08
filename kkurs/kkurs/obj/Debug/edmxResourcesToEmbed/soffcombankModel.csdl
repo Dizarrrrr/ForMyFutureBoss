@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ws01Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Credits">
+    <Key>
+      <PropertyRef Name="ID_credita" />
+    </Key>
+    <Property Name="ID_credita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_klienta" Type="Int32" Nullable="false" />
+    <Property Name="Sum_Credita" Type="Int32" Nullable="false" />
+    <Property Name="Procent_credita" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date_Oformleniya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID__sotrudnika" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Klient" Relationship="ws01Model.FK_Credits_Klient" FromRole="Credits" ToRole="Klient" />
+    <NavigationProperty Name="Sotrudnik" Relationship="ws01Model.FK_Credits_Sotrudnik" FromRole="Credits" ToRole="Sotrudnik" />
+  </EntityType>
+  <EntityType Name="Klient">
+    <Key>
+      <PropertyRef Name="ID_klienta" />
+    </Key>
+    <Property Name="ID_klienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO_klienta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Snils" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date_Birth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Credit" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Credits" Relationship="ws01Model.FK_Credits_Klient" FromRole="Klient" ToRole="Credits" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Sotrudnik">
+    <Key>
+      <PropertyRef Name="ID_sotrudnika" />
+    </Key>
+    <Property Name="ID_sotrudnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO_sotrudnika" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="YYYY_MM_DD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Passport__Seria__Num_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dolgnost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="otdel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Zarplata" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Credits" Relationship="ws01Model.FK_Credits_Sotrudnik" FromRole="Sotrudnik" ToRole="Credits" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="ws01Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Credits" EntityType="Self.Credits" />
+    <EntitySet Name="Klient" EntityType="Self.Klient" />
+    <EntitySet Name="Sotrudnik" EntityType="Self.Sotrudnik" />
+    <AssociationSet Name="FK_Credits_Klient" Association="ws01Model.FK_Credits_Klient">
+      <End Role="Klient" EntitySet="Klient" />
+      <End Role="Credits" EntitySet="Credits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Credits_Sotrudnik" Association="ws01Model.FK_Credits_Sotrudnik">
+      <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+      <End Role="Credits" EntitySet="Credits" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Credits_Klient">
+    <End Type="ws01Model.Klient" Role="Klient" Multiplicity="1" />
+    <End Type="ws01Model.Credits" Role="Credits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klient">
+        <PropertyRef Name="ID_klienta" />
+      </Principal>
+      <Dependent Role="Credits">
+        <PropertyRef Name="ID_klienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Credits_Sotrudnik">
+    <End Type="ws01Model.Sotrudnik" Role="Sotrudnik" Multiplicity="1" />
+    <End Type="ws01Model.Credits" Role="Credits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sotrudnik">
+        <PropertyRef Name="ID_sotrudnika" />
+      </Principal>
+      <Dependent Role="Credits">
+        <PropertyRef Name="ID__sotrudnika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

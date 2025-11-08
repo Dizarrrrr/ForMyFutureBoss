@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище ws01Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Credits">
+    <Key>
+      <PropertyRef Name="ID_credita" />
+    </Key>
+    <Property Name="ID_credita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_klienta" Type="int" Nullable="false" />
+    <Property Name="Sum_Credita" Type="int" Nullable="false" />
+    <Property Name="Procent_credita" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date_Oformleniya" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID_ sotrudnika" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Klient">
+    <Key>
+      <PropertyRef Name="ID_klienta" />
+    </Key>
+    <Property Name="ID_klienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO_klienta" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Snils" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date_Birth" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Credit" Type="int" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sotrudnik">
+    <Key>
+      <PropertyRef Name="ID_sotrudnika" />
+    </Key>
+    <Property Name="ID_sotrudnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO_sotrudnika" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="YYYY-MM-DD" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Passport (Seria, Num)" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="dolgnost" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="otdel" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Zarplata" Type="int" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Credits_Klient">
+    <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+    <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klient">
+        <PropertyRef Name="ID_klienta" />
+      </Principal>
+      <Dependent Role="Credits">
+        <PropertyRef Name="ID_klienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Credits_Sotrudnik">
+    <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="1" />
+    <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sotrudnik">
+        <PropertyRef Name="ID_sotrudnika" />
+      </Principal>
+      <Dependent Role="Credits">
+        <PropertyRef Name="ID_ sotrudnika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище ws01ModelContainer">
+    <EntitySet Name="Credits" EntityType="Self.Credits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sotrudnik" EntityType="Self.Sotrudnik" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Credits_Klient" Association="Self.FK_Credits_Klient">
+      <End Role="Klient" EntitySet="Klient" />
+      <End Role="Credits" EntitySet="Credits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Credits_Sotrudnik" Association="Self.FK_Credits_Sotrudnik">
+      <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+      <End Role="Credits" EntitySet="Credits" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
